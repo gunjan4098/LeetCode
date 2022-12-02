@@ -1,0 +1,1 @@
+i is -1 bcz we have to find the first occurance of val ,it act as mark

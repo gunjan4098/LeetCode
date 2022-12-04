@@ -1,21 +1,35 @@
 class Solution {
     public int minimumAverageDifference(int[] nums) {
-        long sum=0,l=nums.length;
+        
+        int l=nums.length;
+        int ans =-1;
+        long sum=0;
         for(int x:nums){
             sum+=x;
         }
         
-        ArrayList<Long> avgDiff = new ArrayList<>();
-        long n=0,min=Long.MAX_VALUE;
-        for(int i=0;i<l-1;i++){
-            n+=nums[i];
+        
+        long currPrefixSum=0;
+        int min = Integer.MAX_VALUE;
+        for(int i=0;i<l;i++){
+            currPrefixSum+=nums[i];
             
-            long diff=Math.abs((long)(n/(i+1))-(long)((sum-n)/(l-i-1)));
-            avgDiff.add(diff);
-            min=Math.min(min,diff);
+            long leftPartAvg = currPrefixSum/(i+1);
+            
+            long rightPartAvg = sum-currPrefixSum;
+            
+            if(i != l-1){
+                rightPartAvg /=(l-i-1);
+            }
+            
+            int diff=(int)Math.abs(leftPartAvg-rightPartAvg);
+            
+            if(diff<min){
+                min = diff;
+                ans=i;
+            }
         }
-        avgDiff.add(sum/l);
-        min=Math.min(min,(sum/l));
-        return avgDiff.indexOf(min);
+        
+        return ans;
     }
 }

@@ -1,0 +1,1 @@
+ek kam index tak kyuki last mei 0/0 hoga
